@@ -43,6 +43,7 @@ else
 fi
 
 if [[ ${OPEN_HTTP_ACCESS} -eq 1 ]]; then
+  sed -i -e 's/^http_access deny all/#http_access deny all/' /etc/squid/squid.conf
   echo 'http_access allow all' >> /etc/squid/squid.conf
 fi
 
