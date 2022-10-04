@@ -100,6 +100,7 @@ docker run --name squid -d --restart=always \
   --env DISABLE_CACHE=1 \
   --env DISABLE_ACCESS_LOG=1 \
   --env OPEN_HTTP_ACCESS=1 \
+  --env ALLOW_DEVEL_SSL_PORTS=1 \
   mgbi/squid
 ```
 

@@ -27,6 +27,14 @@ fi
 # prepare a new config on each restart
 cp /etc/squid/squid.conf.default /etc/squid/squid.conf
 
+# start adding the rules with a comment
+echo -e '\n#\n# Rules added by the entrypoint\n#' >> /etc/squid/squid.conf
+
+# allow SSL connection to common development ports
+if [[ ${ALLOW_DEVEL_SSL_PORTS} -eq 1 ]]; then
+  echo 'acl SSL_PORTS port 8000-9000' >> /etc/squid/squid.conf
+fi
+
 if [[ ${DISABLE_CACHE} -eq 1 ]]; then
   echo 'cache deny all' >> /etc/squid/squid.conf
   echo 'cache_log /dev/null' >> /etc/squid/squid.conf
