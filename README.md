@@ -1,7 +1,7 @@
 **Forked from:**
 https://github.com/sameersbn/docker-squid
 
-# Squid Docker Image
+# Squid Docker Image (based on Alpine Linux)
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/mgbi/squid.svg?maxAge=8600)][hub]
 [![License](https://img.shields.io/github/license/mgbi/docker-squid.svg?maxAge=8600)]()
