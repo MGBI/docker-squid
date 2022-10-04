@@ -24,9 +24,25 @@ elif [[ ${1} == squid || ${1} == $(which squid) ]]; then
   set --
 fi
 
+# prepare a new config on each restart
+cp /etc/squid/squid.conf.default /etc/squid/squid.conf
+
+if [[ ${DISABLE_CACHE} -eq 1 ]]; then
+  echo 'cache deny all' >> /etc/squid/squid.conf
+  echo 'cache_log /dev/null' >> /etc/squid/squid.conf
+fi
+
+if [[ ${DISABLE_ACCESS_LOG} -eq 1 ]]; then
+  echo 'access_log none' >> /etc/squid/squid.conf
+fi
+
+if [[ ${OPEN_HTTP_ACCESS} -eq 1 ]]; then
+  echo 'http_access allow all' >> /etc/squid/squid.conf
+fi
+
 # default behaviour is to launch squid
 if [[ -z ${1} ]]; then
-  if [[ ! -d ${SQUID_CACHE_DIR}/00 ]]; then
+  if [[ ! ${DISABLE_CACHE} -eq 1 && ! -d ${SQUID_CACHE_DIR}/00 ]]; then
     echo "Initializing cache..."
     $(which squid) -N -f /etc/squid/squid.conf -z
   fi

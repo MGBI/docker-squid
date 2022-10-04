@@ -91,6 +91,18 @@ docker run --name squid -it --rm \
   mgbi/squid -h
 ```
 
+## Simple proxy mode
+
+You can use the Squid as a public proxy without caching and access log:
+```bash
+docker run --name squid -d --restart=always \
+  --publish 3128:3128 \
+  --env DISABLE_CACHE=1 \
+  --env DISABLE_ACCESS_LOG=1 \
+  --env OPEN_HTTP_ACCESS=1 \
+  mgbi/squid
+```
+
 ## Persistence
 
 For the cache to preserve its state across container shutdown and startup you should mount a volume at `/var/spool/squid`.
