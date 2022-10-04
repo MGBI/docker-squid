@@ -30,10 +30,16 @@ cp /etc/squid/squid.conf.default /etc/squid/squid.conf
 if [[ ${DISABLE_CACHE} -eq 1 ]]; then
   echo 'cache deny all' >> /etc/squid/squid.conf
   echo 'cache_log /dev/null' >> /etc/squid/squid.conf
+else
+  echo 'cache_log stdio:/dev/tty' >> /etc/squid/squid.conf
+  echo 'cache_store_log stdio:/dev/tty' >> /etc/squid/squid.conf
 fi
 
 if [[ ${DISABLE_ACCESS_LOG} -eq 1 ]]; then
   echo 'access_log none' >> /etc/squid/squid.conf
+else
+  echo 'logfile_rotate 0' >> /etc/squid/squid.conf
+  echo 'access_log stdio:/dev/tty' >> /etc/squid/squid.conf
 fi
 
 if [[ ${OPEN_HTTP_ACCESS} -eq 1 ]]; then

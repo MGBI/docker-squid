@@ -72,7 +72,7 @@ docker build -t mgbi/squid github.com/mgbi/docker-squid
 Start Squid using:
 
 ```bash
-docker run --name squid -d --restart=always \
+docker run --name squid -t -d --restart=always \
   --publish 3128:3128 \
   --volume /srv/docker/squid/cache:/var/spool/squid \
   mgbi/squid

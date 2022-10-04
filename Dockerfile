@@ -9,6 +9,10 @@ ENV SQUID_VERSION=5.5-r0 \
 RUN apk update \
     && apk add bash squid=${SQUID_VERSION}
 
+# add the squid user to the tty group to be able to write to stdout;
+# use -t option to run the container
+RUN addgroup squid tty
+
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
